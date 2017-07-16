@@ -1,0 +1,17 @@
+.bg-navy {
+    background-color: #f8f8f8;
+}
+
+.lk-menu {
+    color: #000;
+}
+
+.lk-menu:hover {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.nav-menu {
+    background-color: #f8f8f8;
+}
