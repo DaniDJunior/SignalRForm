@@ -117,6 +117,7 @@
     <Content Include="css\dataTables.responsive.css" />
     <Content Include="css\font-awesome.css" />
     <Content Include="css\metisMenu.css" />
+    <Content Include="css\summernote.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -129,8 +130,12 @@
     <Content Include="js\metisMenu.js" />
     <Content Include="js\npm.js" />
     <Content Include="js\sb-admin-2.js" />
+    <Content Include="js\summernote.js" />
     <Content Include="sass\Scripts\bootstrap.js" />
     <Content Include="sass\Scripts\bootstrap.min.js" />
+    <Content Include="fonts\summernote.eot" />
+    <Content Include="fonts\summernote.ttf" />
+    <Content Include="fonts\summernote.woff" />
     <None Include="sass\Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="sass\Scripts\jquery-1.10.2.js" />
     <Content Include="sass\Scripts\jquery-1.10.2.min.js" />

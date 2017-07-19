@@ -27,7 +27,18 @@
             </div>
         </div>
     </div>
-    <div id="divMensagem">
+    
+    <div id="divFrmMensagem">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>
+                    <span id="lblTitulo"></span>
+                </h2>
+            </div>
+        </div>
+        <div class="row" id="divMessage">
+
+        </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
@@ -40,9 +51,14 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="txtMessagem">Mensagem</label>
-                    <text class="form-control" id="txtMessagem">
-                    </text>
+                    <input type="email" class="form-control" id="txtMessagem" >
+                    @*<div id="summernote"></div>*@
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-right">
+                <button class="btn btn-default" type="submit" onclick="sendMessage()">Enviar</button>
             </div>
         </div>
     </div>
@@ -60,7 +76,14 @@
 
     $(function () {
         $('#divErro').hide();
+        $('#divFrmMensagem').hide();
+        //$('#summernote').summernote();
     });
+
+    function sendMessage() {
+        //$('#summernote').summernote('code')
+        $.connection.mensagens.server.sendMessange($("#txtDestino").val(), $('#txtMessagem').val(), $("#txtNome").val());
+    }
 
     function connectChat() {
         $.connection.mensagens.server.createConnection($("#txtNome").val());
@@ -71,9 +94,25 @@
         //$.connection.teste.server.createConnection('Teste');
     });
 
+    $.connection.mensagens.client.ConnectionSucess = function (message) {
+        $('#divErro').hide();
+        $('#divConectar').hide();
+        $('#divFrmMensagem').show();
+        $("#lblTitulo").text(message);
+    }
+
     $.connection.mensagens.client.MessageError = function (message) {
         $('#divErro').show();
         $("#spnErro").text(message);
+    }
+
+    $.connection.mensagens.client.MessageReciever = function (data) {
+        $('<div class="col-md-12"><div class="alert alert-success" role="alert"><p><strong>Message recebida de ' + data.origem + '</strong></p><p>' + data.data + '</p><p>' + data.messagem + '</p></div></div>').appendTo($("#divMessage"));
+    }
+
+    $.connection.mensagens.client.MessageEco = function (data) {
+        $('<div class="col-md-12"><div class="alert alert-info" role="alert"><p><strong>Message enviada para ' + data.destino + '</strong></p><p>' + data.data + '</p><p>' + data.messagem + '</p></div></div>').appendTo($("#divMessage"));
+        $('#divErro').hide();
     }
 
 </script>
