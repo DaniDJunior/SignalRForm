@@ -29,11 +29,14 @@ namespace SignalRForm.Client
             string url = @"http://localhost:61506//";
             connection = new HubConnection(url);
             _hub = connection.CreateHubProxy("mensagens");
-            connection.Start().Wait();
+            
             _hub.On("ConnectionSucess", x => ConnectionSucess(x));
             _hub.On("MessageError", x => MessageError(x));
             _hub.On("MessageEco", x => MessageEco(JsonConvert.DeserializeObject<Retorno>(x.ToString())));
             _hub.On("MessageReciever", x => MessageReciever(JsonConvert.DeserializeObject<Retorno>(x.ToString())));
+            connection.Closed += () => { connection.Start().Wait(); };
+            connection.ConnectionSlow += () => { Console.WriteLine("Conexão signalr lenta"); };
+            connection.Start().Wait();
         }
 
         private void ConnectionSucess(string messagem)
